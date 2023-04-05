@@ -29,6 +29,16 @@
 		</dependency>
 				-->
 		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- jsp템플릿엔진 -->
+
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
@@ -68,7 +78,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.11.0</version>
+			<version>4.1.9.RELEASE</version>
 		</dependency>
 
 		<!--
@@ -88,7 +98,7 @@
         <configuration>
             <excludes>
                 <exclude>
-                    <groupId>org.projectlombok</groupId>
+                    <groupId>org.project.lombok</groupId>
                     <artifactId>lombok</artifactId>
                 </exclude>
             </excludes>
