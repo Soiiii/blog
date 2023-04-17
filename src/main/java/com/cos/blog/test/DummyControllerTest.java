@@ -21,6 +21,18 @@ public class DummyControllerTest {
     @Autowired //의존성 주입(DI)
     private UserRepository userRepository;
 
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id){
+        try{
+            userRepository.deleteById(id);
+        } catch (IllegalArgumentException e){
+            return "삭제 실패. id 존재 안함";
+        }
+
+        return "삭제완료 id:" + id;
+    }
+
+
     // email, password  수정할 예정
     // Json 데이터를 받으려면 @RequestBody가 필요하다
     // == Json 데이터 요청 => Java Object(MessageConverter의 Jackson 라이브러리가 변환해서 받아줌)
@@ -41,7 +53,7 @@ public class DummyControllerTest {
         user.setEmail(requestUser.getEmail());
 
 //        userRepository.save(user);
-        return null;
+        return user;
     }
 
     // http://localhost:8000/blog/dummy/user
