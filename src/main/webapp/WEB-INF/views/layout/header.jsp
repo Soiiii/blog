@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,7 @@
 
 </head>
 <body>
-
+<h1>principal</h1>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -26,7 +30,7 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
     <c:choose>
-        <c:when test="${empty sessionScope.principal}">
+        <c:when test="${empty principal}">
               <ul class="nav navbar-nav">
                 <a href="/loginForm">로그인</a></li>
                 <li><a href="/joinForm">회원가입</a></li>
