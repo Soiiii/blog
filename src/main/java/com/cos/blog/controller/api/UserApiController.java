@@ -21,7 +21,8 @@ public class UserApiController {
 //    @Autowired
 //    private HttpSession session;
 
-    @PostMapping("/api/user")
+    //회원가입하는 페이지 auth-> 인증 안된 사용자에게도 열어줌
+    @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user){
         // User 클래스를 사용하면 username, password, email 들어가서
         user.setRole(RoleType.USER);
