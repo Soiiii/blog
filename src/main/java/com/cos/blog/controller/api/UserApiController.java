@@ -1,7 +1,6 @@
 package com.cos.blog.controller.api;
 
 import com.cos.blog.dto.ResponseDto;
-import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,6 @@ public class UserApiController {
     @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user){
         // User 클래스를 사용하면 username, password, email 들어가서
-        user.setRole(RoleType.USER);
-        System.out.println("UserAPIController: Call Save");
         userService.회원가입(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
     }

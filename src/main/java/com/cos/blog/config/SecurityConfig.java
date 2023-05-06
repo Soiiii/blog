@@ -14,8 +14,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true) //특정 주소로 접근을 하면 권한 및 인증을 미리 체크하겠다
 public class SecurityConfig {
 
+    //IOC가 됨
     @Bean
-    BCryptPasswordEncoder encode() {
+    public BCryptPasswordEncoder encodePWD(){
+        //1234를 암호화해서 encPassword에 다 넣어준다
+        String encPassword = new BCryptPasswordEncoder().encode("1234");
         return new BCryptPasswordEncoder();
     }
 
@@ -23,11 +26,12 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-
+                //csrf토큰 비활성화
+                .csrf().disable()
                 //요청이 들어오면
                 .authorizeHttpRequests()
                         ///auth/** 해당 폼으로 들어오면 누구든지 허가를 준다
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll()
                         //이게 아닌 다른 모든 요청들은 인증 필요
                         .anyRequest().permitAll()
                         .and()
