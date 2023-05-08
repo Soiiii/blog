@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
@@ -31,7 +30,6 @@ public class Board {
     // 섬머노트 라이브러리 사용할 예정 <html>태그가 섞여서 디자인이 됨. -> 글자 용량이 매우 커짐
     private String content;
 
-    @ColumnDefault("0")
     // 조회수
     private int count;
 

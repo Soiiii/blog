@@ -1,7 +1,8 @@
 package com.cos.blog.config.auth;
 
-import com.cos.blog.model.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -9,7 +10,10 @@ import java.util.Collection;
 
 //Spring Security가 로그인 요청을 가로채서 로그인을 진행하고 완료가 되면 UserDetails 타입의 오브젝트를
 //Spring Security 고유한 세션저장소에 저장을 해준다
+
+@Getter
 public class PrincipalDetail implements UserDetails {
+
     //class ~~~ extends User -> 상속
     //User user -> 객체를 품고있는것을 컴포지션이라고 부름
     private User user;
@@ -60,7 +64,8 @@ public class PrincipalDetail implements UserDetails {
         Collection<GrantedAuthority> collectors = new ArrayList<>();
         // add를 하면 GrantedAuthority타입을 넣어주어야한다
 
-        collectors.add(()-> {return "ROLE_" + user.getRole();});
+        collectors.add(()-> {return "ROLE_" ;});
         return collectors;
-    }
+   }
+
 }
