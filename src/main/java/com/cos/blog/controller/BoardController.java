@@ -1,17 +1,25 @@
 package com.cos.blog.controller;
 
 
+import com.cos.blog.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BoardController {
+
+    @Autowired
+    private BoardService boardService;
+
     // {"" -> 아무것도 안 붙혀이을때, "/" -> /가 붙어있을때 여기로 보낸다}
     @GetMapping({"", "/"})
-    public String index(){
+    public String index(Model model){
         // application.yml 에 이미 경로를 설정해놨기 떄문에 prefix, suffix의 경로를 앞에 붙여줌
         // /WEB-INF/views/index.jsp
-        System.out.println("hjkhkj" );
+        model.addAttribute("boards", boardService.글목록());
+        // apiController가 아니라 Controller이기 때문에 return할때 ViewResolver가 작동한다
         return "index";
     }
 
