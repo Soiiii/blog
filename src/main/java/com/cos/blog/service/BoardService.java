@@ -18,7 +18,7 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public void 글쓰기(Board board, User user){ //title, content
+    public void 글쓰기(Board board, User user) { //title, content
         //조회수 기본값:0
         board.setCount(0);
         board.setUser(user);
@@ -26,7 +26,23 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public Page<Board> 글목록(Pageable pageable){
+    @Transactional(readOnly = true)
+    public Page<Board> 글목록(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
+
+    //select만 해오므로 readOnly true로 설정한다
+    @Transactional(readOnly = true)
+    public Board 글상세보기(int id) {
+        return boardRepository.findById(id)
+                .orElseThrow(() -> {
+                    return new IllegalArgumentException("Fail : cannot find id");
+                });
+    }
+
+    @Transactional
+    public void 삭제하기(int id){
+        boardRepository.deleteById(id);
+    }
+
 }
