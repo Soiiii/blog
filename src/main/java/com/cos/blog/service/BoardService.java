@@ -42,7 +42,22 @@ public class BoardService {
 
     @Transactional
     public void 삭제하기(int id){
+        System.out.println("글 삭제하기" + id);
         boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void 글수정하기(int id, Board requestBoard){
+        //영속화시킨다
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("글 상세보기 실패: cannot find id");
+                });
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+        //해당 함수로 종료시에(Service가 종료될 때) 트랜잭션이 종료된다.
+        //이때 더티체킹 -> 왜냐하면 영속화되어있는 보드의 데이터가 달라졌기때문에
+        // -자동 업데이트가 된다. DB flush
     }
 
 }
